@@ -1,0 +1,917 @@
+<!--
+  NepalEdu - Free Educational Website Template
+  --------------------------------------------------
+  Edit this file to customize your homepage, sections, and content.
+  See README.md for full instructions.
+-->
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NepalEdu - Class 9 & 10 Learning Platform</title>
+    <meta name="description" content="Complete educational platform for Nepali Class 9 and 10 students with textbook solutions, past papers, and interactive learning tools.">
+    <meta name="keywords" content="Nepal education, Class 9, Class 10, SEE exam, textbook solutions, online learning, mathematics, science, english, nepali">
+    <meta name="author" content="NepalEdu">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="NepalEdu - Class 9 & 10 Learning Platform">
+    <meta property="og:description" content="Complete educational platform for Nepali Class 9 and 10 students with textbook solutions, past papers, and interactive learning tools.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nepaledu.com">
+    <meta property="og:site_name" content="NepalEdu">
+    <meta property="og:image" content="https://nepaledu.com/images/og-image.jpg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="NepalEdu - Class 9 & 10 Learning Platform">
+    <meta name="twitter:description" content="Complete educational platform for Nepali Class 9 and 10 students with textbook solutions, past papers, and interactive learning tools.">
+    <meta name="twitter:image" content="https://nepaledu.com/images/twitter-card.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://nepaledu.com">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a'
+                        },
+                        secondary: {
+                            50: '#f0fdf4',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d'
+                        }
+                    },
+                    fontFamily: {
+                        display: ['Poppins', 'sans-serif'],
+                        body: ['Inter', 'sans-serif']
+                    },
+                    boxShadow: {
+                        glass: '0 8px 32px 0 rgba(31, 38, 135, 0.18)'
+                    },
+                    animation: {
+                        fade: 'fadeIn 1s ease',
+                        slideup: 'slideUp 1s ease',
+                        pop: 'pop 0.4s cubic-bezier(.8,2,.6,1.5)'
+                    },
+                    keyframes: {
+                        fadeIn: { '0%': { opacity: 0 }, '100%': { opacity: 1 } },
+                        slideUp: { '0%': { transform: 'translateY(40px)', opacity: 0 }, '100%': { transform: 'translateY(0)', opacity: 1 } },
+                        pop: { '0%': { transform: 'scale(0.8)' }, '100%': { transform: 'scale(1)' } }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(16px) saturate(180%);
+            border-radius: 1.5rem;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+            border: 1px solid rgba(255,255,255,0.18);
+        }
+        
+        .dark .glass-effect {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        
+        .hero-bg {
+            background: linear-gradient(120deg, #3b82f6 0%, #22c55e 100%);
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            opacity: 0.95;
+            animation: gradientMove 8s ease-in-out infinite alternate;
+        }
+        
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        
+        .hero-svg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .search-bar {
+            transition: all 0.3s ease;
+        }
+        
+        .search-bar:focus-within {
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+        }
+        
+        .floating-card {
+            transition: all 0.3s ease;
+        }
+        
+        .floating-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark .floating-card:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6, #22c55e);
+            z-index: 9999;
+            transition: width 0.1s ease;
+        }
+        
+        .cursor-glow {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.6) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.1s ease;
+        }
+
+        /* Enhanced Micro-interactions */
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #22c55e);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .nav-link:hover {
+            transform: translateY(-1px);
+        }
+
+        /* Enhanced Button Animations */
+        .btn-primary {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Enhanced Card Animations */
+        .subject-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        
+        .subject-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(34, 197, 94, 0.1) 100%);
+            border-radius: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .subject-card:hover::before {
+            opacity: 1;
+        }
+        
+        .subject-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        /* SEO Content Sections */
+        .main-section {
+            min-height: 80vh;
+        }
+        
+        .breadcrumb {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+        
+        .breadcrumb a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .content-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .dark .content-card {
+            background: #1f2937;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+    <!-- Site-wide Config (edit js/config.js) -->
+    <script src="js/config.js"></script>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <!-- Cursor Glow Effect -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-effect border-b border-gray-200 dark:border-gray-700 shadow-lg animate-fade">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <a href="/" class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-white text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-extrabold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent font-display tracking-tight">NepalEdu</span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="nav-link hover:text-primary-500 transition-colors font-semibold">Home</a>
+                    <a href="/subjects" class="nav-link hover:text-primary-500 transition-colors font-semibold">Subjects</a>
+                    <a href="/dashboard" class="nav-link hover:text-primary-500 transition-colors font-semibold">Dashboard</a>
+                    <a href="/quiz" class="nav-link hover:text-primary-500 transition-colors font-semibold">Daily Quiz</a>
+                    <a href="/leaderboard" class="nav-link hover:text-primary-500 transition-colors font-semibold">Leaderboard</a>
+                </div>
+                
+                <!-- Right Side -->
+                <div class="flex items-center space-x-4">
+                    <!-- Search Bar -->
+                    <div class="relative">
+                        <div class="search-bar bg-white dark:bg-gray-800 rounded-full flex items-center px-4 py-2 space-x-2 border border-gray-200 dark:border-gray-700">
+                            <i class="fas fa-search text-gray-400"></i>
+                            <input id="searchInput" type="text" placeholder="Search topics, questions..." class="flex-1 bg-transparent focus:outline-none text-gray-900 dark:text-white min-w-0">
+                            <button class="bg-primary-500 hover:bg-primary-600 text-white px-4 py-1 rounded-full font-semibold">Search</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Dark Mode Toggle -->
+                    <button id="darkModeToggle" class="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:block"></i>
+                    </button>
+                    
+                    <!-- User Menu -->
+                    <div class="relative">
+                        <button id="userMenuBtn" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors tooltip" data-tooltip="User menu and settings">
+                            <div class="w-8 h-8 bg-primary-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-user text-white"></i>
+                            </div>
+                            <span class="hidden sm:block">Login</span>
+                        </button>
+                        
+                        <!-- Dropdown Menu -->
+                        <div id="userDropdown" class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 hidden">
+                            <div class="py-2">
+                                <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700">Profile</a>
+                                <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700">My Progress</a>
+                                <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700">Bookmarks</a>
+                                <hr class="my-2 border-gray-200 dark:border-gray-700">
+                                <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700">Login</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content Sections -->
+    <main class="pt-16">
+        <!-- Animated Hero Section -->
+        <section id="hero-animated" class="relative overflow-hidden bg-gradient-to-br from-primary-500 to-secondary-500 text-white min-h-[60vh] flex items-center justify-center">
+            <div class="absolute inset-0 z-0 animate-gradient-move">
+                <svg width="100%" height="100%" viewBox="0 0 1440 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="heroGradient" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#3b82f6"/>
+                            <stop offset="100%" stop-color="#22c55e"/>
+                        </linearGradient>
+                    </defs>
+                    <rect width="1440" height="600" fill="url(#heroGradient)"/>
+                    <circle cx="300" cy="200" r="80" fill="#fff" fill-opacity="0.08">
+                        <animate attributeName="cx" values="300;1200;300" dur="12s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="1200" cy="400" r="60" fill="#fff" fill-opacity="0.10">
+                        <animate attributeName="cy" values="400;100;400" dur="10s" repeatCount="indefinite"/>
+                    </circle>
+                </svg>
+            </div>
+            <div class="relative z-10 max-w-3xl mx-auto px-4 py-24 text-center animate-fade-in">
+                <h1 class="text-5xl md:text-7xl font-extrabold mb-6 animate-slide-up">
+                    Welcome to <span class="bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">NepalEdu</span>
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-blue-100 animate-slide-up delay-200">
+                    Your complete learning companion for Class 9 & 10
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center animate-pop-in">
+                    <a href="#dashboard-portal" class="btn-primary bg-white text-primary-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 shadow-lg transition-transform transform hover:scale-105">Start Learning</a>
+                    <a href="#quiz" class="btn-primary bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-primary-600 shadow-lg transition-transform transform hover:scale-105">Take Quiz</a>
+                </div>
+                <div class="mt-10 flex justify-center">
+                    <span class="inline-flex flex-col items-center">
+                        <i class="fas fa-chalkboard-teacher text-6xl text-white bg-primary-600 bg-opacity-80 rounded-full p-6 shadow-lg animate-bounce"></i>
+                        <span class="mt-3 text-lg font-semibold text-white">Animated Learning</span>
+                    </span>
+                </div>
+            </div>
+            <div class="absolute bottom-0 left-0 w-full z-20">
+                <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#fff" fill-opacity="1" d="M0,64L48,58.7C96,53,192,43,288,53.3C384,64,480,96,576,101.3C672,107,768,85,864,80C960,75,1056,85,1152,90.7C1248,96,1344,96,1392,96L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Features/Benefits Section with Animation -->
+        <section class="py-16 bg-white dark:bg-gray-800 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold text-center mb-12 animate-fade-in">Why Choose NepalEdu?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center animate-pop-in delay-100">
+                        <div class="w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce">
+                            <i class="fas fa-book text-3xl text-primary-600 dark:text-primary-400"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Complete Curriculum</h3>
+                        <p class="text-gray-600 dark:text-gray-300">All subjects covered with detailed explanations and solutions.</p>
+                    </div>
+                    <div class="text-center animate-pop-in delay-200">
+                        <div class="w-16 h-16 bg-secondary-100 dark:bg-secondary-900 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce">
+                            <i class="fas fa-robot text-3xl text-secondary-600 dark:text-secondary-400"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">AI-Powered Learning</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Smart quizzes and personalized study plans.</p>
+                    </div>
+                    <div class="text-center animate-pop-in delay-300">
+                        <div class="w-16 h-16 bg-yellow-100 dark:bg-yellow-900 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce">
+                            <i class="fas fa-gamepad text-3xl text-yellow-600 dark:text-yellow-400"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Gamified Experience</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Earn points, unlock achievements, and compete with friends.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute bottom-0 left-0 w-full z-10">
+                <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#f0fdf4" fill-opacity="1" d="M0,64L48,58.7C96,53,192,43,288,53.3C384,64,480,96,576,101.3C672,107,768,85,864,80C960,75,1056,85,1152,90.7C1248,96,1344,96,1392,96L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Modern Dashboard Homepage with Animation -->
+        <section id="dashboard-portal" class="main-section py-16 bg-gradient-to-br from-blue-50 to-green-50 dark:from-gray-900 dark:to-gray-800 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Quick Start Area -->
+                <div class="flex flex-col md:flex-row items-center justify-between mb-12 gap-6">
+                    <div class="flex-1 text-center md:text-left">
+                        <h2 class="text-4xl font-extrabold mb-2">Welcome to Your Learning Dashboard</h2>
+                        <p class="text-lg text-gray-600 dark:text-gray-300 mb-4">Jump right in to your favorite features or pick up where you left off!</p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                            <a href="#subjects" class="btn-primary bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-full font-bold text-lg">Start Learning</a>
+                            <a href="#quiz" class="btn-primary bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-full font-bold text-lg">Take a Quiz</a>
+                        </div>
+                    </div>
+                    <div class="flex-1 flex justify-center md:justify-end">
+                        <img src="https://cdn.pixabay.com/photo/2016/11/29/09/32/analysis-1868574_1280.png" alt="Learning Dashboard" class="w-64 h-48 object-contain rounded-xl shadow-lg bg-white dark:bg-gray-800"/>
+                    </div>
+                </div>
+
+                <!-- Main Features Grid -->
+                <div class="mb-12">
+                    <h3 class="text-2xl font-bold mb-6 text-center">Main Features</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Subjects Card -->
+                        <div class="feature-card bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex flex-col items-center text-center hover:scale-105 transition-transform">
+                            <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-book-open text-3xl text-blue-600 dark:text-blue-400"></i>
+                            </div>
+                            <h4 class="text-xl font-semibold mb-2">Subjects</h4>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">Browse all subjects with detailed explanations and solutions.</p>
+                            <a href="#subjects" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold">View Subjects</a>
+                        </div>
+                        <!-- Subject Detail Card -->
+                        <div class="feature-card bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex flex-col items-center text-center hover:scale-105 transition-transform">
+                            <div class="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-info-circle text-3xl text-green-600 dark:text-green-400"></i>
+                            </div>
+                            <h4 class="text-xl font-semibold mb-2">Subject Detail</h4>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">Explore chapters, topics, and resources for each subject.</p>
+                            <a href="#subject-detail" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg font-semibold">Explore Subject</a>
+                        </div>
+                        <!-- Chapter Detail Card -->
+                        <div class="feature-card bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex flex-col items-center text-center hover:scale-105 transition-transform">
+                            <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-layer-group text-3xl text-purple-600 dark:text-purple-400"></i>
+                            </div>
+                            <h4 class="text-xl font-semibold mb-2">Chapter Detail</h4>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">Dive into chapter summaries, key points, and exercises.</p>
+                            <a href="#chapter-detail" class="bg-purple-500 hover:bg-purple-600 text-white px-6 py-2 rounded-lg font-semibold">View Chapter</a>
+                        </div>
+                        <!-- Question Detail Card -->
+                        <div class="feature-card bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex flex-col items-center text-center hover:scale-105 transition-transform">
+                            <div class="w-16 h-16 bg-yellow-100 dark:bg-yellow-900 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-question-circle text-3xl text-yellow-600 dark:text-yellow-400"></i>
+                            </div>
+                            <h4 class="text-xl font-semibold mb-2">Question Detail</h4>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">See detailed solutions and explanations for questions.</p>
+                            <a href="#question-detail" class="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-lg font-semibold">See Questions</a>
+                        </div>
+                        <!-- Quiz Card -->
+                        <div class="feature-card bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex flex-col items-center text-center hover:scale-105 transition-transform">
+                            <div class="w-16 h-16 bg-pink-100 dark:bg-pink-900 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-pen-alt text-3xl text-pink-600 dark:text-pink-400"></i>
+                            </div>
+                            <h4 class="text-xl font-semibold mb-2">Quiz</h4>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">Test your knowledge with interactive quizzes and instant feedback.</p>
+                            <a href="#quiz" class="bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-lg font-semibold">Take a Quiz</a>
+                        </div>
+                        <!-- Dashboard Card -->
+                        <div class="feature-card bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex flex-col items-center text-center hover:scale-105 transition-transform">
+                            <div class="w-16 h-16 bg-teal-100 dark:bg-teal-900 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-tachometer-alt text-3xl text-teal-600 dark:text-teal-400"></i>
+                            </div>
+                            <h4 class="text-xl font-semibold mb-2">Dashboard</h4>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">Track your progress, achievements, and personalized learning stats.</p>
+                            <a href="#dashboard" class="bg-teal-500 hover:bg-teal-600 text-white px-6 py-2 rounded-lg font-semibold">Go to Dashboard</a>
+                        </div>
+                        <!-- Leaderboard Card -->
+                        <div class="feature-card bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex flex-col items-center text-center hover:scale-105 transition-transform">
+                            <div class="w-16 h-16 bg-orange-100 dark:bg-orange-900 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-trophy text-3xl text-orange-600 dark:text-orange-400"></i>
+                            </div>
+                            <h4 class="text-xl font-semibold mb-2">Leaderboard</h4>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">See top performers and compete with friends across Nepal.</p>
+                            <a href="#leaderboard" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg font-semibold">View Leaderboard</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity Row -->
+                <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-lg p-8 mt-8">
+                    <h3 class="text-2xl font-bold mb-4">Recent Activity</h3>
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="flex-1 flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check-circle text-2xl text-blue-600 dark:text-blue-400"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-gray-900 dark:text-white">Completed Math Quiz</div>
+                                <div class="text-sm text-gray-600 dark:text-gray-400">Scored 85% on Algebra Quiz</div>
+                            </div>
+                        </div>
+                        <div class="flex-1 flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
+                                <i class="fas fa-play-circle text-2xl text-green-600 dark:text-green-400"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-gray-900 dark:text-white">Watched Science Video</div>
+                                <div class="text-sm text-gray-600 dark:text-gray-400">Physics: Laws of Motion</div>
+                            </div>
+                        </div>
+                        <div class="flex-1 flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center">
+                                <i class="fas fa-bookmark text-2xl text-purple-600 dark:text-purple-400"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-gray-900 dark:text-white">Bookmarked English Chapter</div>
+                                <div class="text-sm text-gray-600 dark:text-gray-400">Grammar: Tenses</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Subjects Section -->
+        <section id="subjects" class="main-section">
+            <div class="max-w-7xl mx-auto px-4 py-8">
+                <div class="breadcrumb mb-6">
+                    <a href="/">Home</a> > Subjects
+                </div>
+                
+                <h1 class="text-3xl font-bold mb-8">All Subjects</h1>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="subject-card bg-white dark:bg-gray-800 rounded-xl p-6 text-center">
+                        <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-calculator text-2xl text-blue-600 dark:text-blue-400"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Mathematics</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Complete math curriculum with step-by-step solutions</p>
+                        <a href="/subjects/mathematics" class="inline-block bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg">
+                            Explore
+                        </a>
+                    </div>
+                    
+                    <div class="subject-card bg-white dark:bg-gray-800 rounded-xl p-6 text-center">
+                        <div class="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-flask text-2xl text-green-600 dark:text-green-400"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Science</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Physics, Chemistry, and Biology concepts</p>
+                        <a href="/subjects/science" class="inline-block bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg">
+                            Explore
+                        </a>
+                    </div>
+                    
+                    <div class="subject-card bg-white dark:bg-gray-800 rounded-xl p-6 text-center">
+                        <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-language text-2xl text-purple-600 dark:text-purple-400"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">English</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Grammar, literature, and communication skills</p>
+                        <a href="/subjects/english" class="inline-block bg-purple-500 hover:bg-purple-600 text-white px-6 py-2 rounded-lg">
+                            Explore
+                        </a>
+                    </div>
+                    
+                    <div class="subject-card bg-white dark:bg-gray-800 rounded-xl p-6 text-center">
+                        <div class="w-16 h-16 bg-red-100 dark:bg-red-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-book-open text-2xl text-red-600 dark:text-red-400"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Nepali</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Nepali grammar, literature, and culture</p>
+                        <a href="/subjects/nepali" class="inline-block bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg">
+                            Explore
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Subject Detail Section -->
+        <section id="subject-detail" class="main-section">
+            <!-- Content will be dynamically loaded -->
+        </section>
+
+        <!-- Chapter Detail Section -->
+        <section id="chapter-detail" class="main-section">
+            <!-- Content will be dynamically loaded -->
+        </section>
+
+        <!-- Question Detail Section -->
+        <section id="question-detail" class="main-section">
+            <!-- Content will be dynamically loaded -->
+        </section>
+
+        <!-- Quiz Section -->
+        <section id="quiz" class="main-section">
+            <div class="max-w-7xl mx-auto px-4 py-8">
+                <div class="breadcrumb mb-6">
+                    <a href="/">Home</a> > Quiz
+                </div>
+                
+                <h1 class="text-3xl font-bold mb-8">Daily Quiz</h1>
+                
+                <div class="content-card">
+                    <h2 class="text-2xl font-semibold mb-4">Test Your Knowledge</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6">
+                        Challenge yourself with our daily quizzes and track your progress over time.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
+                            <h3 class="text-lg font-semibold mb-3">Mathematics Quiz</h3>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">Test your math skills with algebra, geometry, and more.</p>
+                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">
+                                Start Quiz
+                            </button>
+                        </div>
+                        
+                        <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
+                            <h3 class="text-lg font-semibold mb-3">Science Quiz</h3>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">Explore physics, chemistry, and biology concepts.</p>
+                            <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg">
+                                Start Quiz
+                            </button>
+                        </div>
+                        
+                        <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
+                            <h3 class="text-lg font-semibold mb-3">English Quiz</h3>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">Improve your grammar and vocabulary skills.</p>
+                            <button class="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg">
+                                Start Quiz
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="main-section">
+            <div class="max-w-7xl mx-auto px-4 py-8">
+                <div class="breadcrumb mb-6">
+                    <a href="/">Home</a> > Dashboard
+                </div>
+                
+                <h1 class="text-3xl font-bold mb-8">Student Dashboard</h1>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="content-card">
+                        <h2 class="text-xl font-semibold mb-4">Progress Overview</h2>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span>Mathematics</span>
+                                <span class="text-green-600">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-green-500 h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                            
+                            <div class="flex justify-between items-center">
+                                <span>Science</span>
+                                <span class="text-blue-600">72%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-blue-500 h-2 rounded-full" style="width: 72%"></div>
+                            </div>
+                            
+                            <div class="flex justify-between items-center">
+                                <span>English</span>
+                                <span class="text-purple-600">68%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-purple-500 h-2 rounded-full" style="width: 68%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="content-card">
+                        <h2 class="text-xl font-semibold mb-4">Recent Activity</h2>
+                        <div class="space-y-3">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                <span class="text-sm">Completed Math Quiz</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                                <span class="text-sm">Watched Science Video</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
+                                <span class="text-sm">Bookmarked English Chapter</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="content-card">
+                        <h2 class="text-xl font-semibold mb-4">Quick Actions</h2>
+                        <div class="space-y-3">
+                            <button class="w-full bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg">
+                                Continue Learning
+                            </button>
+                            <button class="w-full bg-secondary-500 hover:bg-secondary-600 text-white px-4 py-2 rounded-lg">
+                                Take Quiz
+                            </button>
+                            <button class="w-full bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg">
+                                View Bookmarks
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Leaderboard Section -->
+        <section id="leaderboard" class="main-section">
+            <div class="max-w-7xl mx-auto px-4 py-8">
+                <div class="breadcrumb mb-6">
+                    <a href="/">Home</a> > Leaderboard
+                </div>
+                
+                <h1 class="text-3xl font-bold mb-8">Leaderboard</h1>
+                
+                <div class="content-card">
+                    <h2 class="text-2xl font-semibold mb-6">Top Students</h2>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-4 bg-yellow-50 dark:bg-yellow-900 rounded-lg">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center text-white font-bold">1</div>
+                                <div>
+                                    <h3 class="font-semibold">Ram Sharma</h3>
+                                    <p class="text-sm text-gray-600 dark:text-gray-300">Class 10</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-bold text-yellow-600">2,450 XP</div>
+                                <div class="text-sm text-gray-600 dark:text-gray-300">Level 15</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-8 h-8 bg-gray-500 rounded-full flex items-center justify-center text-white font-bold">2</div>
+                                <div>
+                                    <h3 class="font-semibold">Sita Thapa</h3>
+                                    <p class="text-sm text-gray-600 dark:text-gray-300">Class 9</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-bold text-gray-600">2,180 XP</div>
+                                <div class="text-sm text-gray-600 dark:text-gray-300">Level 14</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-4 bg-orange-50 dark:bg-orange-900 rounded-lg">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold">3</div>
+                                <div>
+                                    <h3 class="font-semibold">Hari Gurung</h3>
+                                    <p class="text-sm text-gray-600 dark:text-gray-300">Class 10</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-bold text-orange-600">1,950 XP</div>
+                                <div class="text-sm text-gray-600 dark:text-gray-300">Level 13</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-white text-xl"></i>
+                        </div>
+                        <span class="text-xl font-bold">NepalEdu</span>
+                    </div>
+                    <p class="text-gray-400">Empowering Nepali students with quality education resources.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="/" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="/subjects" class="hover:text-white transition-colors">Subjects</a></li>
+                        <li><a href="/quiz" class="hover:text-white transition-colors">Quiz</a></li>
+                        <li><a href="/dashboard" class="hover:text-white transition-colors">Dashboard</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Subjects</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="/subjects/mathematics" class="hover:text-white transition-colors">Mathematics</a></li>
+                        <li><a href="/subjects/science" class="hover:text-white transition-colors">Science</a></li>
+                        <li><a href="/subjects/english" class="hover:text-white transition-colors">English</a></li>
+                        <li><a href="/subjects/nepali" class="hover:text-white transition-colors">Nepali</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center hover:bg-primary-600 transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center hover:bg-primary-600 transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center hover:bg-primary-600 transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center hover:bg-primary-600 transition-colors">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 NepalEdu. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script src="js/router.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/subjects.js"></script>
+    <script src="js/quiz.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/student-dashboard.js"></script>
+    <script src="js/ai-integration.js"></script>
+    <script src="js/gamification.js"></script>
+    <script src="js/badges-leaderboards.js"></script>
+    <script src="js/learning-velocity.js"></script>
+    <script src="js/retention-analysis.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/attention-tracking.js"></script>
+    <script src="js/sentiment-analysis.js"></script>
+    <script src="js/automated-content.js"></script>
+    <script src="js/plagiarism-detection.js"></script>
+    <script src="js/personalized-learning.js"></script>
+    <script src="js/content-versioning.js"></script>
+    <script src="js/bulk-upload.js"></script>
+    <script src="js/advanced-search.js"></script>
+    <script src="js/search-history.js"></script>
+    <script src="js/seo-router.js"></script>
+    <script src="js/admin.js"></script>
+    
+    <script>
+        // Initialize SEO Router
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize the SEO router
+            if (window.seoRouter) {
+                console.log('SEO Router initialized successfully');
+            }
+            
+        // GSAP Animations
+            gsap.from('.hero-bg', { opacity: 0, duration: 1 });
+            gsap.from('.hero-svg', { opacity: 0, y: 40, duration: 1, delay: 0.2 });
+            gsap.from('.animate-fade', { opacity: 0, y: 40, stagger: 0.2, duration: 1, delay: 0.3 });
+            gsap.from('.animate-slideup', { opacity: 0, y: 60, duration: 1, delay: 0.5 });
+            gsap.from('.animate-pop', { scale: 0.8, opacity: 0, duration: 0.7, delay: 0.7 });
+        });
+    </script>
+</body>
+</html> 

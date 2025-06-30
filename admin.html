@@ -1,0 +1,131 @@
+<?php
+session_start();
+$admin_username = 'susil';
+$admin_password = 'rajkumari';
+$login_error = '';
+
+if (isset($_POST['admin_login'])) {
+    $username = $_POST['username'] ?? '';
+    $password = $_POST['password'] ?? '';
+    if ($username === $admin_username && $password === $admin_password) {
+        $_SESSION['is_admin'] = true;
+        header('Location: admin.html');
+        exit();
+    } else {
+        $login_error = 'Invalid username or password.';
+    }
+}
+
+if (isset($_GET['logout'])) {
+    session_destroy();
+    header('Location: admin.html');
+    exit();
+}
+
+$is_logged_in = isset($_SESSION['is_admin']) && $_SESSION['is_admin'] === true;
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - NepalEdu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass { background: rgba(255,255,255,0.15); backdrop-filter: blur(16px) saturate(180%); }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-100 to-blue-100 min-h-screen dark:from-gray-900 dark:to-gray-800">
+<?php if (!$is_logged_in): ?>
+    <!-- Admin Login Form -->
+    <div class="flex items-center justify-center min-h-screen">
+        <form method="post" class="bg-white dark:bg-gray-900 shadow-2xl rounded-2xl p-10 w-full max-w-md glass">
+            <h2 class="text-3xl font-bold mb-6 text-center">Admin Login</h2>
+            <?php if ($login_error): ?>
+                <div class="mb-4 text-red-500 text-center font-semibold"><?php echo $login_error; ?></div>
+            <?php endif; ?>
+            <div class="mb-4">
+                <label class="block mb-2 font-semibold">Username</label>
+                <input type="text" name="username" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" required autofocus>
+            </div>
+            <div class="mb-6">
+                <label class="block mb-2 font-semibold">Password</label>
+                <input type="password" name="password" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+            <button type="submit" name="admin_login" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-lg transition">Login</button>
+        </form>
+    </div>
+<?php else: ?>
+    <!-- Admin Dashboard -->
+    <nav class="flex items-center justify-between px-8 py-4 bg-white dark:bg-gray-900 shadow-lg">
+        <div class="flex items-center space-x-3">
+            <i class="fas fa-crown text-2xl text-yellow-500"></i>
+            <span class="text-2xl font-extrabold bg-gradient-to-r from-blue-600 to-green-500 bg-clip-text text-transparent">NepalEdu Admin</span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <span class="text-gray-700 dark:text-gray-200 font-semibold">Welcome, <span class="text-blue-600 dark:text-blue-400">susil</span></span>
+            <a href="?logout=1" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-semibold"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </nav>
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold mb-8 text-center">Admin Dashboard <span class="text-2xl align-middle">👑</span></h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            <!-- User Management -->
+            <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex flex-col items-center text-center">
+                <i class="fas fa-users-cog text-4xl text-blue-600 mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">User Management</h3>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">View, edit, delete, and impersonate users. Manage roles and reset passwords.</p>
+                <button class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold">Manage Users</button>
+            </div>
+            <!-- Content Management -->
+            <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex flex-col items-center text-center">
+                <i class="fas fa-book-medical text-4xl text-green-600 mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">Content Management</h3>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">Add, edit, or delete subjects, chapters, questions, quizzes, and resources.</p>
+                <button class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg font-semibold">Manage Content</button>
+            </div>
+            <!-- Analytics Dashboard -->
+            <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex flex-col items-center text-center">
+                <i class="fas fa-chart-line text-4xl text-purple-600 mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">Analytics</h3>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">View real-time stats: active users, quiz stats, top students, search trends, and more.</p>
+                <button class="bg-purple-500 hover:bg-purple-600 text-white px-6 py-2 rounded-lg font-semibold">View Analytics</button>
+            </div>
+            <!-- Gamification Controls -->
+            <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex flex-col items-center text-center">
+                <i class="fas fa-gamepad text-4xl text-pink-600 mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">Gamification</h3>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">Award/revoke badges, XP, coins, and manage leaderboards.</p>
+                <button class="bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-lg font-semibold">Gamify</button>
+            </div>
+            <!-- AI & Automation -->
+            <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex flex-col items-center text-center">
+                <i class="fas fa-robot text-4xl text-cyan-600 mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">AI & Automation</h3>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">Trigger AI content generation, review flagged content, manage notifications.</p>
+                <button class="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-2 rounded-lg font-semibold">AI Tools</button>
+            </div>
+            <!-- System Settings -->
+            <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex flex-col items-center text-center">
+                <i class="fas fa-cogs text-4xl text-yellow-600 mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">System Settings</h3>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">Toggle features, manage announcements, maintenance mode, SEO, and more.</p>
+                <button class="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-lg font-semibold">Settings</button>
+            </div>
+            <!-- Logs & Security -->
+            <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex flex-col items-center text-center">
+                <i class="fas fa-shield-alt text-4xl text-red-600 mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">Logs & Security</h3>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">View activity logs, login attempts, and security alerts.</p>
+                <button class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg font-semibold">View Logs</button>
+            </div>
+        </div>
+        <div class="text-center mt-12 text-gray-500 dark:text-gray-400">
+            <i class="fas fa-crown text-yellow-500"></i> You have god mode access. Use your powers wisely!
+        </div>
+    </main>
+<?php endif; ?>
+</body>
+</html> 

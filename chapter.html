@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter Details | NepalEdu</title>
+    <meta name="description" content="Chapter details, questions, and resources">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a'
+                        },
+                        secondary: {
+                            50: '#f0fdf4',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .dark .glass-effect {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-gray-900 dark:to-gray-800 min-h-screen text-gray-900 dark:text-gray-100">
+    <!-- Header -->
+    <header class="flex items-center justify-between px-6 py-4 bg-white dark:bg-gray-900 shadow-md">
+        <div class="flex items-center space-x-3">
+            <a href="index.html" class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-graduation-cap text-white text-xl"></i>
+                </div>
+                <span class="text-xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
+                    NepalEdu
+                </span>
+            </a>
+        </div>
+        <button onclick="window.history.back()" class="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-medium flex items-center space-x-2">
+            <i class="fas fa-arrow-left"></i>
+            <span>Back</span>
+        </button>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto p-6 mt-8">
+        <!-- Chapter Card -->
+        <div class="glass-effect rounded-2xl shadow-xl p-8 mb-8 border border-primary-100 dark:border-gray-700">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                    <div class="w-14 h-14 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-book-open text-white text-2xl"></i>
+                    </div>
+                    <div>
+                        <h1 id="chapterTitle" class="text-3xl font-bold">Chapter Name</h1>
+                        <p id="subjectName" class="text-lg text-gray-600 dark:text-gray-400">Subject Name</p>
+                    </div>
+                </div>
+                <div class="flex space-x-2">
+                    <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-200 rounded-full text-sm font-medium">Questions: <span id="questionCount">0</span></span>
+                    <span class="px-3 py-1 bg-secondary-100 dark:bg-secondary-900 text-secondary-700 dark:text-secondary-200 rounded-full text-sm font-medium">Videos: <span id="videoCount">0</span></span>
+                </div>
+            </div>
+            <div class="flex flex-col md:flex-row md:space-x-8">
+                <!-- Questions List -->
+                <div class="flex-1 mb-8 md:mb-0">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center"><i class="fas fa-question-circle mr-2 text-primary-500"></i>Questions</h2>
+                    <ul id="questionsList" class="space-y-3 max-h-64 overflow-y-auto pr-2">
+                        <li class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 shadow-sm flex items-center space-x-3">
+                            <i class="fas fa-circle text-xs text-primary-500"></i>
+                            <span>Sample question will appear here.</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Video Lessons -->
+                <div class="flex-1">
+                    <h2 class="text-xl font-semibold mb-4 flex items-center"><i class="fas fa-video mr-2 text-secondary-500"></i>Video Lessons</h2>
+                    <ul id="videosList" class="space-y-3 max-h-64 overflow-y-auto pr-2">
+                        <li class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 shadow-sm flex items-center space-x-3">
+                            <i class="fas fa-play-circle text-secondary-500"></i>
+                            <span>Sample video lesson will appear here.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 flex justify-end space-x-4">
+                <button class="bg-primary-500 hover:bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold shadow transition-colors flex items-center space-x-2">
+                    <i class="fas fa-play"></i>
+                    <span>Start Learning</span>
+                </button>
+                <button class="bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white px-6 py-3 rounded-lg font-semibold shadow transition-colors flex items-center space-x-2">
+                    <i class="fas fa-download"></i>
+                    <span>Download PDF</span>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Optional: Add a script to dynamically fill in chapter data -->
+    <script>
+        // Demo data for questions and videos by subject and chapter
+        const demoContent = {
+            1: { // Mathematics (Class 9)
+                1: {
+                    questions: [
+                        { q: 'What is an algebraic expression? Give two examples.', a: 'An algebraic expression is a mathematical phrase that can contain numbers, variables, and operators. Examples: 2x + 3, a^2 - b.' },
+                        { q: 'Simplify: 2x + 3x - 4x', a: '2x + 3x - 4x = (2 + 3 - 4)x = 1x = x.' },
+                        { q: 'Expand: (a + b)^2', a: '(a + b)^2 = a^2 + 2ab + b^2.' },
+                        { q: 'Factorize: x^2 - 9', a: 'x^2 - 9 = (x + 3)(x - 3).' },
+                        { q: 'Evaluate: 3x^2 for x = 2', a: '3x^2 = 3 * (2^2) = 3 * 4 = 12.' }
+                    ],
+                    videos: [
+                        'Introduction to Algebraic Expressions',
+                        'How to Simplify Expressions',
+                        'Algebraic Expansion Tricks'
+                    ]
+                },
+                2: {
+                    questions: [
+                        { q: 'Solve: 2x + 5 = 15', a: '2x + 5 = 15 => 2x = 10 => x = 5.' },
+                        { q: 'What is a linear equation?', a: 'An equation of the form ax + b = 0, where a ≠ 0.' },
+                        { q: 'Graph the equation y = 2x + 1', a: 'It is a straight line with slope 2 and y-intercept 1.' },
+                        { q: 'Find the value of x: 3x - 7 = 2', a: '3x - 7 = 2 => 3x = 9 => x = 3.' },
+                        { q: 'Explain the slope-intercept form.', a: 'y = mx + c, where m is slope and c is y-intercept.' }
+                    ],
+                    videos: [
+                        'Solving Linear Equations',
+                        'Graphing Lines',
+                        'Understanding Slope'
+                    ]
+                }
+            },
+            2: { // Science (Class 9)
+                5: {
+                    questions: [
+                        { q: 'Define motion and give two examples.', a: 'Motion is the change in position of an object over time. Examples: a car driving, a ball rolling.' },
+                        { q: 'State Newton\'s First Law of Motion.', a: 'An object at rest stays at rest and an object in motion stays in motion unless acted upon by an external force.' },
+                        { q: 'What is velocity?', a: 'Velocity is the speed of something in a given direction.' },
+                        { q: 'Differentiate between speed and velocity.', a: 'Speed is scalar (only magnitude), velocity is vector (magnitude and direction).' },
+                        { q: 'Explain uniform and non-uniform motion.', a: 'Uniform motion: constant speed; non-uniform: speed changes.' }
+                    ],
+                    videos: [
+                        'Basics of Motion',
+                        'Newton\'s Laws Explained',
+                        'Speed vs Velocity'
+                    ]
+                },
+                6: {
+                    questions: [
+                        { q: 'What is an atom?', a: 'The smallest unit of matter that retains the properties of an element.' },
+                        { q: 'Name the three subatomic particles.', a: 'Proton, Neutron, Electron.' },
+                        { q: 'What is a molecule?', a: 'A group of atoms bonded together.' }
+                    ],
+                    videos: [
+                        'Structure of Atom',
+                        'Subatomic Particles',
+                        'Molecules and Compounds'
+                    ]
+                }
+            },
+            3: { // English (Class 9)
+                8: {
+                    questions: [
+                        { q: 'What are the three main tenses in English?', a: 'Present, Past, and Future.' },
+                        { q: 'Give an example of present continuous tense.', a: 'I am reading a book.' },
+                        { q: 'What is the past participle of "go"?', a: 'Gone.' }
+                    ],
+                    videos: [
+                        'Understanding Tenses',
+                        'Present Continuous Explained',
+                        'Past Participles'
+                    ]
+                }
+            },
+            4: { // Nepali (Class 9)
+                11: {
+                    questions: [
+                        { q: 'संज्ञा भनेको के हो?', a: 'नाम, स्थान, वस्तु, वा भावलाई जनाउने शब्द संज्ञा हो।' },
+                        { q: 'सर्वनामको उदाहरण दिनुहोस्।', a: 'ऊ, उनी, तपाईं, हामी।' },
+                        { q: 'व्याकरण के हो?', a: 'भाषाको नियमहरूको अध्ययन व्याकरण हो।' }
+                    ],
+                    videos: [
+                        'संज्ञा र सर्वनाम',
+                        'नेपाली व्याकरण',
+                        'शब्द र वाक्य'
+                    ]
+                }
+            },
+            5: { // Social Studies (Class 9)
+                14: {
+                    questions: [
+                        { q: 'नेपालको प्राचीन इतिहास के हो?', a: 'नेपालको प्राचीन इतिहास किराँत, लिच्छवि, र मल्ल वंशसँग सम्बन्धित छ।' },
+                        { q: 'भू-आकृति भन्नाले के जनाउँछ?', a: 'पृथ्वीको सतहका विभिन्न रूपहरू (पहाड, तराई, हिमाल)।' },
+                        { q: 'संविधान के हो?', a: 'देशको मूल कानुन जसले शासनको आधार तय गर्छ।' }
+                    ],
+                    videos: [
+                        'नेपालको इतिहास',
+                        'भूगोलका रूपहरू',
+                        'संविधानको परिचय'
+                    ]
+                }
+            },
+            6: { // Computer Science (Class 9)
+                17: {
+                    questions: [
+                        { q: 'What is programming?', a: 'The process of writing instructions for a computer to perform tasks.' },
+                        { q: 'Name two programming languages.', a: 'Python, JavaScript.' },
+                        { q: 'What is an algorithm?', a: 'A step-by-step procedure to solve a problem.' }
+                    ],
+                    videos: [
+                        'Introduction to Programming',
+                        'Popular Programming Languages',
+                        'What is an Algorithm?'
+                    ]
+                }
+            },
+            7: { // Health & Physical Education (Class 9)
+                20: {
+                    questions: [
+                        { q: 'What is personal hygiene?', a: 'Practices that help maintain health and prevent disease, especially through cleanliness.' },
+                        { q: 'Why is nutrition important?', a: 'Nutrition provides the body with essential nutrients for growth and health.' },
+                        { q: 'Name a physical fitness activity.', a: 'Running, swimming, or cycling.' }
+                    ],
+                    videos: [
+                        'Personal Hygiene Tips',
+                        'Importance of Nutrition',
+                        'Physical Fitness Activities'
+                    ]
+                }
+            },
+            8: { // Economics (Class 9)
+                23: {
+                    questions: [
+                        { q: 'What is economics?', a: 'The study of how people use resources to satisfy their needs and wants.' },
+                        { q: 'Define demand and supply.', a: 'Demand: desire to buy goods; Supply: amount of goods available.' },
+                        { q: 'What is a market?', a: 'A place where buyers and sellers interact.' }
+                    ],
+                    videos: [
+                        'Introduction to Economics',
+                        'Demand and Supply',
+                        'How Markets Work'
+                    ]
+                }
+            }
+        };
+
+        // Parse URL params
+        const urlParams = new URLSearchParams(window.location.search);
+        const subjectId = urlParams.get('subject');
+        const chapterId = urlParams.get('chapter');
+
+        // Set titles
+        document.getElementById('chapterTitle').textContent = 'Chapter ' + (chapterId || 'Name');
+        document.getElementById('subjectName').textContent = 'Subject ' + (subjectId || 'Name');
+
+        // Load demo content if available
+        let questions = [{q: 'Sample question will appear here.', a: 'Sample answer will appear here.'}];
+        let videos = ['Sample video lesson will appear here.'];
+        if (demoContent[subjectId] && demoContent[subjectId][chapterId]) {
+            questions = demoContent[subjectId][chapterId].questions;
+            videos = demoContent[subjectId][chapterId].videos;
+        }
+        document.getElementById('questionCount').textContent = questions.length;
+        document.getElementById('videoCount').textContent = videos.length;
+
+        // Render questions as expandable items with answers and AI Enhance button, with anchor and copy-link
+        const questionsList = document.getElementById('questionsList');
+        questionsList.innerHTML = questions.map((qa, idx) => `
+            <li id="q${idx}" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 shadow-sm mb-2 relative">
+                <button onclick="toggleAnswer(${idx})" class="flex items-center w-full text-left focus:outline-none">
+                    <i class="fas fa-question-circle text-primary-500 mr-2"></i>
+                    <span class="font-medium">${qa.q}</span>
+                </button>
+                <button onclick="copyQuestionLink(${idx})" class="absolute top-2 right-2 text-gray-400 hover:text-primary-500" title="Copy link to this question">
+                    <i class="fas fa-link"></i>
+                </button>
+                <span id="copy-msg-${idx}" class="absolute top-2 right-10 text-xs text-green-500 hidden">Link copied!</span>
+                <div id="answer-${idx}" class="hidden mt-3 pl-7">
+                    <div class="flex items-start">
+                        <i class="fas fa-lightbulb text-yellow-400 mr-2 mt-1"></i>
+                        <span id="answer-text-${idx}">${qa.a}</span>
+                    </div>
+                    <button onclick="aiEnhanceAnswer(${idx})" class="mt-2 px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-200 rounded hover:bg-primary-200 dark:hover:bg-primary-800 text-sm font-semibold flex items-center space-x-2">
+                        <i class='fas fa-robot'></i>
+                        <span>AI Enhance</span>
+                    </button>
+                    <span id="ai-loading-${idx}" class="ml-2 hidden"><i class='fas fa-spinner fa-spin'></i> Enhancing...</span>
+                </div>
+            </li>
+        `).join('');
+
+        // Render videos
+        const videosList = document.getElementById('videosList');
+        videosList.innerHTML = videos.map((v, i) => {
+            // If v is a YouTube URL, embed it; otherwise, show as text
+            if (v.startsWith('http')) {
+                // Extract YouTube video ID
+                const match = v.match(/(?:youtu.be\/|v=)([\w-]{11})/);
+                const vid = match ? match[1] : '';
+                if (vid) {
+                    return `<li class='mb-4'><div class='aspect-w-16 aspect-h-9'><iframe class='rounded-lg w-full' src='https://www.youtube.com/embed/${vid}' frameborder='0' allowfullscreen></iframe></div></li>`;
+                }
+            }
+            return `<li class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 shadow-sm flex items-center space-x-3">
+                <i class="fas fa-play-circle text-secondary-500"></i>
+                <span>${v}</span>
+            </li>`;
+        }).join('');
+
+        // Expand/collapse answer logic
+        window.toggleAnswer = function(idx) {
+            const ans = document.getElementById('answer-' + idx);
+            if (ans.classList.contains('hidden')) {
+                ans.classList.remove('hidden');
+            } else {
+                ans.classList.add('hidden');
+            }
+        };
+
+        // AI Enhance logic (real Gemini integration)
+        window.aiEnhanceAnswer = async function(idx) {
+            const loading = document.getElementById('ai-loading-' + idx);
+            const answerText = document.getElementById('answer-text-' + idx);
+            loading.classList.remove('hidden');
+            const question = questions[idx].q;
+            const answer = questions[idx].a;
+            try {
+                const res = await fetch('/api/enhance', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ question, answer })
+                });
+                const data = await res.json();
+                loading.classList.add('hidden');
+                if (data.enhanced) {
+                    answerText.textContent = data.enhanced;
+                } else {
+                    answerText.textContent = answer + ' (AI enhancement failed: ' + (data.error || 'Unknown error') + ')';
+                }
+            } catch (err) {
+                loading.classList.add('hidden');
+                answerText.textContent = answer + ' (AI enhancement failed: Network error)';
+            }
+        };
+
+        // Copy question link logic
+        window.copyQuestionLink = function(idx) {
+            const url = window.location.origin + window.location.pathname + window.location.search + `#q${idx}`;
+            navigator.clipboard.writeText(url);
+            const msg = document.getElementById('copy-msg-' + idx);
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 1200);
+        };
+
+        // After rendering questions, inject FAQPage schema markup for SEO
+        function injectFAQSchema(questions) {
+            const faqEntities = questions.map(qa => ({
+                '@type': 'Question',
+                'name': qa.q,
+                'acceptedAnswer': {
+                    '@type': 'Answer',
+                    'text': qa.a
+                }
+            }));
+            const faqSchema = {
+                '@context': 'https://schema.org',
+                '@type': 'FAQPage',
+                'mainEntity': faqEntities
+            };
+            let script = document.getElementById('faq-schema');
+            if (!script) {
+                script = document.createElement('script');
+                script.type = 'application/ld+json';
+                script.id = 'faq-schema';
+                document.head.appendChild(script);
+            }
+            script.textContent = JSON.stringify(faqSchema, null, 2);
+        }
+        injectFAQSchema(questions);
+
+        // --- Quiz Section ---
+        const quizDemo = [
+            {
+                q: 'What is the capital of Nepal?',
+                options: ['Kathmandu', 'Pokhara', 'Lalitpur', 'Biratnagar'],
+                answer: 0,
+                explanation: 'Kathmandu is the capital and largest city of Nepal.'
+            },
+            {
+                q: 'Which is a programming language?',
+                options: ['HTML', 'CSS', 'Python', 'Photoshop'],
+                answer: 2,
+                explanation: 'Python is a programming language; HTML and CSS are markup and style languages.'
+            },
+            {
+                q: 'What is H2O commonly known as?',
+                options: ['Salt', 'Water', 'Oxygen', 'Hydrogen'],
+                answer: 1,
+                explanation: 'H2O is the chemical formula for water.'
+            }
+        ];
+        function renderQuiz() {
+            return `
+                <div class="mt-12 bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center"><i class="fas fa-question mr-2 text-primary-500"></i>Chapter Quiz</h3>
+                    <div id="quizQuestions">
+                        ${quizDemo.map((qz, idx) => `
+                            <div class="mb-6">
+                                <div class="font-semibold mb-2">${idx + 1}. ${qz.q}</div>
+                                <div class="space-y-2">
+                                    ${qz.options.map((opt, oidx) => `
+                                        <button onclick="checkQuizAnswer(${idx},${oidx})" id="quiz-btn-${idx}-${oidx}" class="w-full text-left px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 hover:bg-primary-100 dark:hover:bg-primary-900 transition-colors">${opt}</button>
+                                    `).join('')}
+                                </div>
+                                <div id="quiz-expl-${idx}" class="mt-2 text-sm text-green-600 font-medium hidden"></div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+        // Insert quiz after main content
+        let quizSection = document.getElementById('chapterQuizSection');
+        if (!quizSection) {
+            quizSection = document.createElement('div');
+            quizSection.id = 'chapterQuizSection';
+            document.querySelector('main').appendChild(quizSection);
+        }
+        quizSection.innerHTML = renderQuiz();
+        // Quiz answer logic
+        window.checkQuizAnswer = function(qIdx, oIdx) {
+            const qz = quizDemo[qIdx];
+            const expl = document.getElementById('quiz-expl-' + qIdx);
+            if (oIdx === qz.answer) {
+                expl.textContent = 'Correct! ' + qz.explanation;
+                expl.classList.remove('hidden', 'text-red-600');
+                expl.classList.add('text-green-600');
+            } else {
+                expl.textContent = 'Incorrect. ' + qz.explanation;
+                expl.classList.remove('hidden', 'text-green-600');
+                expl.classList.add('text-red-600');
+            }
+            // Disable all buttons for this question
+            qz.options.forEach((_, oidx) => {
+                const btn = document.getElementById(`quiz-btn-${qIdx}-${oidx}`);
+                if (btn) btn.disabled = true;
+            });
+        };
+
+        // --- Flashcards Section ---
+        const flashcardsDemo = [
+            { term: 'Photosynthesis', def: 'The process by which green plants use sunlight to synthesize food from carbon dioxide and water.' },
+            { term: 'Atom', def: 'The smallest unit of matter that retains the properties of an element.' },
+            { term: 'Algorithm', def: 'A step-by-step procedure to solve a problem.' }
+        ];
+        function renderFlashcards() {
+            return `
+                <div class="mt-12 bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center"><i class="fas fa-clone mr-2 text-secondary-500"></i>Flashcards</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6" id="flashcardGrid">
+                        ${flashcardsDemo.map((fc, idx) => `
+                            <div class="flashcard relative bg-primary-50 dark:bg-primary-900 rounded-xl p-6 cursor-pointer text-center transition-transform duration-300 hover:scale-105" onclick="flipFlashcard(${idx})" id="flashcard-${idx}">
+                                <div class="font-semibold text-lg" id="flashcard-front-${idx}">${fc.term}</div>
+                                <div class="hidden text-gray-700 dark:text-gray-200 mt-2" id="flashcard-back-${idx}">${fc.def}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+        let flashcardSection = document.getElementById('chapterFlashcardSection');
+        if (!flashcardSection) {
+            flashcardSection = document.createElement('div');
+            flashcardSection.id = 'chapterFlashcardSection';
+            document.querySelector('main').appendChild(flashcardSection);
+        }
+        flashcardSection.innerHTML = renderFlashcards();
+        window.flipFlashcard = function(idx) {
+            const front = document.getElementById('flashcard-front-' + idx);
+            const back = document.getElementById('flashcard-back-' + idx);
+            if (front.classList.contains('hidden')) {
+                front.classList.remove('hidden');
+                back.classList.add('hidden');
+            } else {
+                front.classList.add('hidden');
+                back.classList.remove('hidden');
+            }
+        };
+
+        // --- Notes Section ---
+        function getNotesKey() {
+            return 'notes_' + window.location.search;
+        }
+        function saveNotes(val) {
+            localStorage.setItem(getNotesKey(), val);
+        }
+        function loadNotes() {
+            return localStorage.getItem(getNotesKey()) || '';
+        }
+        let notesSection = document.getElementById('chapterNotesSection');
+        if (!notesSection) {
+            notesSection = document.createElement('div');
+            notesSection.id = 'chapterNotesSection';
+            document.querySelector('main').appendChild(notesSection);
+        }
+        notesSection.innerHTML = `
+            <div class="mt-12 bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
+                <h3 class="text-2xl font-bold mb-6 flex items-center"><i class="fas fa-sticky-note mr-2 text-yellow-500"></i>Your Notes</h3>
+                <textarea id="chapterNotesInput" class="w-full min-h-[120px] p-4 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500" placeholder="Write your personal notes here...">${loadNotes()}</textarea>
+                <div class="text-right mt-2">
+                    <button onclick="saveNotes(document.getElementById('chapterNotesInput').value)" class="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg font-semibold">Save Notes</button>
+                </div>
+            </div>
+        `;
+
+        // --- Bookmark Button for Each Question ---
+        function getBookmarksKey() {
+            return 'bookmarks_' + window.location.search;
+        }
+        function loadBookmarks() {
+            try { return JSON.parse(localStorage.getItem(getBookmarksKey()) || '[]'); } catch { return []; }
+        }
+        function saveBookmarks(arr) {
+            localStorage.setItem(getBookmarksKey(), JSON.stringify(arr));
+        }
+        let bookmarks = loadBookmarks();
+        // Update question rendering to include bookmark button
+        questionsList.innerHTML = questions.map((qa, idx) => `
+            <li id="q${idx}" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 shadow-sm mb-2 relative">
+                <button onclick="toggleAnswer(${idx})" class="flex items-center w-full text-left focus:outline-none">
+                    <i class="fas fa-question-circle text-primary-500 mr-2"></i>
+                    <span class="font-medium">${qa.q}</span>
+                </button>
+                <button onclick="copyQuestionLink(${idx})" class="absolute top-2 right-10 text-gray-400 hover:text-primary-500" title="Copy link to this question">
+                    <i class="fas fa-link"></i>
+                </button>
+                <button onclick="toggleBookmark(${idx})" class="absolute top-2 right-2 text-yellow-400 hover:text-yellow-600" title="Bookmark this question">
+                    <i class="${bookmarks.includes(idx) ? 'fas' : 'far'} fa-star"></i>
+                </button>
+                <span id="copy-msg-${idx}" class="absolute top-2 right-20 text-xs text-green-500 hidden">Link copied!</span>
+                <div id="answer-${idx}" class="hidden mt-3 pl-7">
+                    <div class="flex items-start">
+                        <i class="fas fa-lightbulb text-yellow-400 mr-2 mt-1"></i>
+                        <span id="answer-text-${idx}">${qa.a}</span>
+                    </div>
+                    <button onclick="aiEnhanceAnswer(${idx})" class="mt-2 px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-200 rounded hover:bg-primary-200 dark:hover:bg-primary-800 text-sm font-semibold flex items-center space-x-2">
+                        <i class='fas fa-robot'></i>
+                        <span>AI Enhance</span>
+                    </button>
+                    <span id="ai-loading-${idx}" class="ml-2 hidden"><i class='fas fa-spinner fa-spin'></i> Enhancing...</span>
+                </div>
+            </li>
+        `).join('');
+        window.toggleBookmark = function(idx) {
+            let bookmarks = loadBookmarks();
+            if (bookmarks.includes(idx)) {
+                bookmarks = bookmarks.filter(i => i !== idx);
+            } else {
+                bookmarks.push(idx);
+            }
+            saveBookmarks(bookmarks);
+            // Rerender to update star icon
+            questionsList.innerHTML = questions.map((qa, idx) => `
+                <li id="q${idx}" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 shadow-sm mb-2 relative">
+                    <button onclick="toggleAnswer(${idx})" class="flex items-center w-full text-left focus:outline-none">
+                        <i class="fas fa-question-circle text-primary-500 mr-2"></i>
+                        <span class="font-medium">${qa.q}</span>
+                    </button>
+                    <button onclick="copyQuestionLink(${idx})" class="absolute top-2 right-10 text-gray-400 hover:text-primary-500" title="Copy link to this question">
+                        <i class="fas fa-link"></i>
+                    </button>
+                    <button onclick="toggleBookmark(${idx})" class="absolute top-2 right-2 text-yellow-400 hover:text-yellow-600" title="Bookmark this question">
+                        <i class="${bookmarks.includes(idx) ? 'fas' : 'far'} fa-star"></i>
+                    </button>
+                    <span id="copy-msg-${idx}" class="absolute top-2 right-20 text-xs text-green-500 hidden">Link copied!</span>
+                    <div id="answer-${idx}" class="hidden mt-3 pl-7">
+                        <div class="flex items-start">
+                            <i class="fas fa-lightbulb text-yellow-400 mr-2 mt-1"></i>
+                            <span id="answer-text-${idx}">${qa.a}</span>
+                        </div>
+                        <button onclick="aiEnhanceAnswer(${idx})" class="mt-2 px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-200 rounded hover:bg-primary-200 dark:hover:bg-primary-800 text-sm font-semibold flex items-center space-x-2">
+                            <i class='fas fa-robot'></i>
+                            <span>AI Enhance</span>
+                        </button>
+                        <span id="ai-loading-${idx}" class="ml-2 hidden"><i class='fas fa-spinner fa-spin'></i> Enhancing...</span>
+                    </div>
+                </li>
+            `).join('');
+        };
+
+        // --- Discussion/Q&A Section ---
+        function getDiscussionKey() {
+            return 'discussion_' + window.location.search;
+        }
+        function loadDiscussion() {
+            try { return JSON.parse(localStorage.getItem(getDiscussionKey()) || '[]'); } catch { return []; }
+        }
+        function saveDiscussion(arr) {
+            localStorage.setItem(getDiscussionKey(), JSON.stringify(arr));
+        }
+        let discussionSection = document.getElementById('chapterDiscussionSection');
+        if (!discussionSection) {
+            discussionSection = document.createElement('div');
+            discussionSection.id = 'chapterDiscussionSection';
+            document.querySelector('main').appendChild(discussionSection);
+        }
+        function renderDiscussion() {
+            const comments = loadDiscussion();
+            return `
+                <div class="mt-12 bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center"><i class="fas fa-comments mr-2 text-primary-500"></i>Discussion & Q/A</h3>
+                    <div id="discussionList" class="mb-4 space-y-4">
+                        ${comments.length === 0 ? '<div class="text-gray-400">No comments yet. Be the first to ask or answer!</div>' : comments.map(c => `<div class='p-4 bg-gray-50 dark:bg-gray-700 rounded-lg'><div class='font-semibold'>${c.name}</div><div class='text-gray-700 dark:text-gray-200'>${c.text}</div></div>`).join('')}
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <input id="discussionName" class="flex-1 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 focus:outline-none" placeholder="Your name (optional)">
+                        <input id="discussionText" class="flex-1 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 focus:outline-none" placeholder="Ask a question or share an answer...">
+                        <button onclick="addDiscussionComment()" class="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg font-semibold">Post</button>
+                    </div>
+                </div>
+            `;
+        }
+        discussionSection.innerHTML = renderDiscussion();
+        window.addDiscussionComment = function() {
+            const name = document.getElementById('discussionName').value || 'Anonymous';
+            const text = document.getElementById('discussionText').value;
+            if (!text.trim()) return;
+            const comments = loadDiscussion();
+            comments.push({ name, text });
+            saveDiscussion(comments);
+            discussionSection.innerHTML = renderDiscussion();
+        };
+    </script>
+</body>
+</html> 
